@@ -10,6 +10,8 @@ public class Gun : MonoBehaviour
 	private PlayerControl playerCtrl;		// Reference to the PlayerControl script.
 	private Animator anim;					// Reference to the Animator component.
 
+    public float waveFrequency;
+    public float waveLength;
 
 	void Awake()
 	{
