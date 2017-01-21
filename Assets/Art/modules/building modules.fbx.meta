@@ -19,6 +19,27 @@ ModelImporter:
     100022: Lamp.003
     100024: Lamp.004
     100026: Plane
+    100028: beam.000
+    100030: beam.001
+    100032: beam.002
+    100034: beam.003
+    100036: beam.004
+    100038: beam.005
+    100040: beam.006
+    100042: beam.007
+    100044: beam.008
+    100046: corridor long
+    100048: Cube.001
+    100050: door.frame
+    100052: ladder.001
+    100054: module.002
+    100056: module.003
+    100058: module.004
+    100060: module_short
+    100062: roof
+    100064: beam.009
+    100066: godrays.001
+    100068: rails
     400000: //RootNode
     400002: Camera
     400004: Cube.000
@@ -33,6 +54,27 @@ ModelImporter:
     400022: Lamp.003
     400024: Lamp.004
     400026: Plane
+    400028: beam.000
+    400030: beam.001
+    400032: beam.002
+    400034: beam.003
+    400036: beam.004
+    400038: beam.005
+    400040: beam.006
+    400042: beam.007
+    400044: beam.008
+    400046: corridor long
+    400048: Cube.001
+    400050: door.frame
+    400052: ladder.001
+    400054: module.002
+    400056: module.003
+    400058: module.004
+    400060: module_short
+    400062: roof
+    400064: beam.009
+    400066: godrays.001
+    400068: rails
     2300000: Cube.000
     2300002: Cube.002
     2300004: Cube.003
@@ -40,6 +82,27 @@ ModelImporter:
     2300008: Cube.005
     2300010: door
     2300012: Plane
+    2300014: beam.000
+    2300016: beam.001
+    2300018: beam.002
+    2300020: beam.003
+    2300022: beam.004
+    2300024: beam.005
+    2300026: beam.006
+    2300028: beam.007
+    2300030: beam.008
+    2300032: corridor long
+    2300034: Cube.001
+    2300036: door.frame
+    2300038: ladder.001
+    2300040: module.002
+    2300042: module.003
+    2300044: module.004
+    2300046: module_short
+    2300048: roof
+    2300050: beam.009
+    2300052: godrays.001
+    2300054: rails
     3300000: Cube.000
     3300002: Cube.002
     3300004: Cube.003
@@ -47,6 +110,27 @@ ModelImporter:
     3300008: Cube.005
     3300010: door
     3300012: Plane
+    3300014: beam.000
+    3300016: beam.001
+    3300018: beam.002
+    3300020: beam.003
+    3300022: beam.004
+    3300024: beam.005
+    3300026: beam.006
+    3300028: beam.007
+    3300030: beam.008
+    3300032: corridor long
+    3300034: Cube.001
+    3300036: door.frame
+    3300038: ladder.001
+    3300040: module.002
+    3300042: module.003
+    3300044: module.004
+    3300046: module_short
+    3300048: roof
+    3300050: beam.009
+    3300052: godrays.001
+    3300054: rails
     4300000: Cube.005
     4300002: Cube.000
     4300004: Cube.004
@@ -54,6 +138,27 @@ ModelImporter:
     4300008: Cube.003
     4300010: Cube.002
     4300012: door
+    4300014: roof
+    4300016: corridor long
+    4300018: beam.008
+    4300020: beam.007
+    4300022: beam.006
+    4300024: beam.005
+    4300026: beam.004
+    4300028: beam.003
+    4300030: beam.002
+    4300032: beam.000
+    4300034: beam.001
+    4300036: module.004
+    4300038: door.frame
+    4300040: module.003
+    4300042: ladder.001
+    4300044: module.002
+    4300046: Cube.001
+    4300048: module_short
+    4300050: beam.009
+    4300052: godrays.001
+    4300054: rails
   materials:
     importMaterials: 1
     materialName: 0
