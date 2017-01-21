@@ -20,12 +20,16 @@ public enum State
 }
 
 [RequireComponent(typeof(Rigidbody))]
+
+[RequireComponent(typeof(JumpScript))]
 public class Movement : MonoBehaviour {
 		
 	public float speed = 10.0f;
 
 	public PlayerPrefix prefix;
 
+
+	public Vector3 direction;
 	private bool grounded = false;
 
 	// Update is called once per frame
@@ -34,20 +38,27 @@ public class Movement : MonoBehaviour {
 	private string jumpAxis;
     private string verticalAxis;
 
-    private State currentState;
+    
+	[SerializeField]
 	public State CurrentState { 
 		get{ return currentState;} 
 		set{ 
 			//Debug.LogFormat ("Change Player {0} state from {1} to {2}", transform.name, currentState, value);
 			currentState = value;
+			anim.StateChange ();
+
 		}}
+	[SerializeField]
+	private State currentState;
     public float controllerThreshold = 0.9f;
 
 	private JumpScript jumpScript;
+	private SpriteAnimator anim;
 
 
 	void Start() {
 
+		anim = transform.GetComponentInChildren<SpriteAnimator> ();
 		jumpScript = transform.GetComponent<JumpScript> ();
 
 		if (prefix == PlayerPrefix.None) {
@@ -88,10 +99,13 @@ public class Movement : MonoBehaviour {
 		
 		float x = Input.GetAxisRaw (horizontalAxis);
         float y = Input.GetAxisRaw(verticalAxis);
-
-        Vector3 direction = new Vector3 (-x, 0.0f , 0.0f); /// depends on the main camera movement
-		direction.Normalize();
-		transform.position += Time.deltaTime * speed * direction; 
+		if (x != 0.0f || y != 0.0f) {
+			Run ();
+		} else {
+			if (CurrentState == State.Running) {
+				CurrentState = State.None;
+			}
+		}
 	}
 
 	void Jump() {
@@ -106,7 +120,13 @@ public class Movement : MonoBehaviour {
         CurrentState = State.Ducking;
     }
 
-	void Animate() {
+	void Run() {
+		float x = Input.GetAxisRaw (horizontalAxis);
 
+		direction = new Vector3 (-x, 0.0f , 0.0f); /// depends on the main camera movement
+		direction.Normalize();
+		transform.position += Time.deltaTime * speed * direction; 
+		CurrentState = State.Running;
 	}
+
 }
