@@ -51,11 +51,11 @@ public class JumpScript : MonoBehaviour {
 				}
 			}
 
-			yield return new WaitForEndOfFrame();
+			yield return new WaitForFixedUpdate();
 		}
 	}
 
 	bool isGrounded () {
-		return Physics.Linecast(transform.position, transform.position + 1.1f * Vector3.down,1 << LayerMask.NameToLayer("Ground"));
+		return Physics.Linecast(transform.position, transform.position + 0.3f * Vector3.down,1 << LayerMask.NameToLayer("Ground"));
 	}
 }
