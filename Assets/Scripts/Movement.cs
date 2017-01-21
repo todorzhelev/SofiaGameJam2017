@@ -59,10 +59,6 @@ public class Movement : MonoBehaviour {
 			horizontalAxis = prefix.ToString () + "Horizontal";
 			verticalAxis = prefix.ToString () + "Vertical";
 		}
-		print (transform.name);
-		print (jumpAxis);
-		print (horizontalAxis);
-		print (verticalAxis);
 
 
 	}
@@ -93,8 +89,6 @@ public class Movement : MonoBehaviour {
 		float x = Input.GetAxisRaw (horizontalAxis);
         float y = Input.GetAxisRaw(verticalAxis);
 
-		print (y);
-
         Vector3 direction = new Vector3 (-x, 0.0f , 0.0f); /// depends on the main camera movement
 		direction.Normalize();
 		transform.position += Time.deltaTime * speed * direction; 
@@ -110,6 +104,9 @@ public class Movement : MonoBehaviour {
     void Duck()
     {
         CurrentState = State.Ducking;
-
     }
+
+	void Animate() {
+
+	}
 }
