@@ -20,14 +20,15 @@ public class Gun : MonoBehaviour
     /// </summary>
     public struct Particle
     {
-        public Particle(Rigidbody body, int Lifetime)
+        public Particle(Rigidbody body, float Lifetime)
         {
             rigidBody = body;
             lifetime = Lifetime;
         }
 
         public Rigidbody rigidBody;
-        public int lifetime;
+        //in milliseconds
+        public float lifetime;
     }
 
     /// <summary>
@@ -53,7 +54,7 @@ public class Gun : MonoBehaviour
 
             Particle particle = new Particle();
             particle.rigidBody = bulletInstance;
-            particle.lifetime = 100;
+            particle.lifetime = 1000;
 
             bulletInstance.AddForce(transform.forward * speed);
 
@@ -63,7 +64,11 @@ public class Gun : MonoBehaviour
         for (int i = 0; i < particlesList.Count; i++)
         {
             Particle particle = particlesList[i];
-            particlesList[i] = new Particle(particle.rigidBody, --particle.lifetime);
+
+            //in milliseconds
+            var currentDt = Time.deltaTime * 1000;
+            var currentLife = particle.lifetime - currentDt;
+            particlesList[i] = new Particle(particle.rigidBody, currentLife);
 
             if (particlesList[i].lifetime <= 0)
             {
