@@ -10,8 +10,8 @@ public class Gun : MonoBehaviour
 	private PlayerControl playerCtrl;		// Reference to the PlayerControl script.
 	private Animator anim;					// Reference to the Animator component.
 
-    public float waveFrequency;
-    public float waveLength;
+    public float waveFrequency = 0.1f;
+    public float waveLength = 1000;
 
     public List<Particle> particlesList;
 
@@ -20,15 +20,17 @@ public class Gun : MonoBehaviour
     /// </summary>
     public struct Particle
     {
-        public Particle(Rigidbody body, float Lifetime)
+        public Particle(Rigidbody body, float lifetime, float scale)
         {
-            rigidBody = body;
-            lifetime = Lifetime;
+            m_rigidBody = body;
+            m_lifetime  = lifetime;
+            m_scale     = scale;
         }
 
-        public Rigidbody rigidBody;
+        public Rigidbody m_rigidBody;
         //in milliseconds
-        public float lifetime;
+        public float m_lifetime;
+        public float m_scale;
     }
 
     /// <summary>
@@ -53,8 +55,11 @@ public class Gun : MonoBehaviour
             Rigidbody bulletInstance = Instantiate(rocket, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))) as Rigidbody;
 
             Particle particle = new Particle();
-            particle.rigidBody = bulletInstance;
-            particle.lifetime = 1000;
+            particle.m_rigidBody = bulletInstance;
+            particle.m_lifetime  = waveLength;
+            particle.m_scale     = waveFrequency;
+
+            bulletInstance.transform.localScale = new Vector3(waveFrequency, waveFrequency, waveFrequency);
 
             bulletInstance.AddForce(transform.forward * speed);
 
@@ -67,12 +72,12 @@ public class Gun : MonoBehaviour
 
             //in milliseconds
             var currentDt = Time.deltaTime * 1000;
-            var currentLife = particle.lifetime - currentDt;
-            particlesList[i] = new Particle(particle.rigidBody, currentLife);
+            var currentLife = particle.m_lifetime - currentDt;
+            particlesList[i] = new Particle(particle.m_rigidBody, currentLife,10);
 
-            if (particlesList[i].lifetime <= 0)
+            if (particlesList[i].m_lifetime <= 0)
             {
-                Destroy(particlesList[i].rigidBody.gameObject);
+                Destroy(particlesList[i].m_rigidBody.gameObject);
                 particlesList.RemoveAt(i);
             }
         }
