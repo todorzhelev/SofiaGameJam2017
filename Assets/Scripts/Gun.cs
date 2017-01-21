@@ -10,9 +10,13 @@ public class Gun : MonoBehaviour
 	private PlayerControl playerCtrl;		// Reference to the PlayerControl script.
 	private Animator anim;					// Reference to the Animator component.
 
+    //controls how big the wave is
     public float waveFrequency = 0.1f;
+    //controls the lifetime of a wave
     public float waveLength = 1000;
-
+    public float waveMaxScale = 4.0f;
+    //gradually scaling the wave over time
+    public float waveScaleModifier = 0.01f;
     public List<Particle> particlesList;
 
     /// <summary>
@@ -73,7 +77,15 @@ public class Gun : MonoBehaviour
             //in milliseconds
             var currentDt = Time.deltaTime * 1000;
             var currentLife = particle.m_lifetime - currentDt;
-            particlesList[i] = new Particle(particle.m_rigidBody, currentLife,10);
+            particlesList[i] = new Particle(particle.m_rigidBody, currentLife, waveFrequency);
+
+            var currentScale = particlesList[i].m_rigidBody.transform.localScale;
+            if (currentScale.x <= waveMaxScale && 
+                currentScale.y <= waveMaxScale && 
+                currentScale.z <= waveMaxScale)
+            {
+                particlesList[i].m_rigidBody.transform.localScale += new Vector3(waveScaleModifier, waveScaleModifier, waveScaleModifier);
+            }
 
             if (particlesList[i].m_lifetime <= 0)
             {
