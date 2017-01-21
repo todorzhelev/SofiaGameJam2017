@@ -1,0 +1,31 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[RequireComponent(typeof(Rigidbody))]
+public class Collision : MonoBehaviour {
+
+	// Use this for initialization
+	void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Vector3 triggerForwardVec = other.transform.forward;
+        Vector3 currentForwardVec = transform.forward;
+
+        RaycastHit[] arr = Physics.RaycastAll(other.transform.position, triggerForwardVec);
+
+        if(arr.Length > 0)
+        {
+            Vector3 reflectedVector = Vector3.Reflect(triggerForwardVec, arr[0].normal);
+            other.transform.forward = new Vector3(0, 0, -1);
+            other.GetComponent<Rigidbody>().AddForce(other.transform.forward * 1000);
+        }
+    }
+}
