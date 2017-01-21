@@ -61,7 +61,7 @@ public class Gun : MonoBehaviour
 
        // float y = Input.GetAxisRaw(axis);
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown(prefix+"Fire1"))
         {
             Rigidbody bulletInstance = Instantiate(rocket, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))) as Rigidbody;
 
