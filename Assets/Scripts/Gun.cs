@@ -25,8 +25,8 @@ public class Gun : MonoBehaviour
 		if(Input.GetButtonDown("Fire1"))
 		{
             Rigidbody bulletInstance = Instantiate(rocket, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))) as Rigidbody;
-
-            bulletInstance.AddForce(Vector3.left * speed);
+            
+            bulletInstance.AddForce(transform.forward * speed);
         }
 	}
 }
