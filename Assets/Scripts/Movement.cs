@@ -6,6 +6,7 @@ using UnityEngine;
 
 public enum PlayerPrefix
 {
+	None,
 	P1_,
 	P2_
 }
@@ -39,12 +40,18 @@ public class Movement : MonoBehaviour {
     public State currentState;
     public float controllerThreshold = 0.9f;
 
-    void Start() {
-		horizontalAxis = prefix.ToString () + "Horizontal";
-		jumpAxis = prefix.ToString() + "Jump";
-        verticalAxis = prefix.ToString() + "Vertical";
-       
-    }
+
+	void Start() {
+		
+		if (prefix == PlayerPrefix.None) {
+			jumpAxis = "Jump";
+			horizontalAxis = "Horizontal";
+		} else {
+			jumpAxis = prefix.ToString () + "Jump";
+			horizontalAxis = prefix.ToString () + "Horizontal";
+		}
+
+	}
 
 	void Update() {
 		
@@ -80,7 +87,6 @@ public class Movement : MonoBehaviour {
             Duck();
         }
 
-        print(y);
         if( Math.Abs(y) < 0.001 )
         {
             currentState = State.None;
