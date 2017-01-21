@@ -28,13 +28,14 @@ public class Movement : MonoBehaviour {
 	void Start() {
 		horizontalAxis = prefix.ToString () + "Horizontal";
 		jumpAxis = prefix.ToString() + "Jump";
+
 	}
 
 	void Update() {
 		
 		grounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
 
-		Debug.Log (grounded);
+
 		// If the jump button is pressed and the player is grounded then the player should jump.
 		if(Input.GetButtonDown(jumpAxis) && grounded)
 			jump = true;
