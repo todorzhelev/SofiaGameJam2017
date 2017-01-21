@@ -5,6 +5,7 @@ using UnityEngine;
 
 public enum PlayerPrefix
 {
+	None,
 	P1_,
 	P2_
 }
@@ -26,8 +27,14 @@ public class Movement : MonoBehaviour {
 	private string jumpAxis;
 
 	void Start() {
-		horizontalAxis = prefix.ToString () + "Horizontal";
-		jumpAxis = prefix.ToString() + "Jump";
+		
+		if (prefix == PlayerPrefix.None) {
+			jumpAxis = "Jump";
+			horizontalAxis = "Horizontal";
+		} else {
+			jumpAxis = prefix.ToString () + "Jump";
+			horizontalAxis = prefix.ToString () + "Horizontal";
+		}
 
 	}
 
