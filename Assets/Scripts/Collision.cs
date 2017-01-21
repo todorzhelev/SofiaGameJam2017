@@ -24,7 +24,8 @@ public class Collision : MonoBehaviour {
         if(arr.Length > 0)
         {
             Vector3 reflectedVector = Vector3.Reflect(triggerForwardVec, arr[0].normal);
-            other.transform.forward = new Vector3(0, 0, -1);
+            //should debug this
+            other.transform.forward = reflectedVector;
             other.GetComponent<Rigidbody>().AddForce(other.transform.forward * 1000);
         }
     }
