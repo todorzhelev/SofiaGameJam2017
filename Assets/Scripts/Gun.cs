@@ -5,9 +5,9 @@ using System.Collections.Generic;
 public class Gun : MonoBehaviour
 {
 	public Rigidbody rocket;				// Prefab of the rocket.
-	public float speed = 20f;				// The speed the rocket will fire at.
+	public float speed = 200f;				// The speed the rocket will fire at.
 
-	private PlayerControl playerCtrl;		// Reference to the PlayerControl script.
+	private Movement playerCtrl;		// Reference to the PlayerControl script.
 	private Animator anim;					// Reference to the Animator component.
 
     //controls how big the wave is
@@ -46,7 +46,7 @@ public class Gun : MonoBehaviour
         particlesList = new List<Particle>();
         // Setting up the references.
         anim = transform.root.gameObject.GetComponent<Animator>();
-		playerCtrl = transform.root.GetComponent<PlayerControl>();
+		playerCtrl = transform.GetComponent<Movement>();
 	}
 
     /// <summary>
@@ -63,9 +63,9 @@ public class Gun : MonoBehaviour
             particle.m_lifetime  = waveLength;
             particle.m_scale     = waveFrequency;
 
-            bulletInstance.transform.localScale = new Vector3(waveFrequency, waveFrequency, waveFrequency);
+            bulletInstance.transform.localScale = new Vector3(waveFrequency, waveFrequency, 0.0f);
             bulletInstance.transform.Rotate(new Vector3(90,0,0));
-            bulletInstance.AddForce(transform.forward * speed);
+			bulletInstance.AddForce(playerCtrl.direction * speed);
 
             particlesList.Add(particle);
         }

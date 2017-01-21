@@ -16,8 +16,9 @@ public class Collision : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
+
+		print (transform.name + "   "+ other.transform.name);
         Vector3 triggerForwardVec = other.transform.forward;
-        Vector3 currentForwardVec = transform.forward;
 
         RaycastHit[] arr = Physics.RaycastAll(other.transform.position, triggerForwardVec);
 

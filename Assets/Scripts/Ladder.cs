@@ -7,6 +7,7 @@ using UnityEngine;
 public class Ladder : MonoBehaviour {
 
 	private Transform top;
+	private Transform middle;
 	private Transform bottom;
 
 	private enum Move {
@@ -16,6 +17,7 @@ public class Ladder : MonoBehaviour {
 
 	private void Start() {
 		top = transform.FindChild ("Top");
+		middle = transform.FindChild ("Middle");
 		bottom = transform.FindChild ("Bottom");
 	}
 	 
