@@ -96,8 +96,8 @@ public class Gun : MonoBehaviour
 
             if (particlesList[i].m_lifetime <= 0)
             {
-                //Destroy(particlesList[i].m_rigidBody.gameObject);
-//                particlesList.RemoveAt(i);
+                Destroy(particlesList[i].m_rigidBody.gameObject);
+                particlesList.RemoveAt(i);
             }
         }
 	}
