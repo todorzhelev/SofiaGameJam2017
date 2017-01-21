@@ -23,26 +23,33 @@ public enum State
 public class Movement : MonoBehaviour {
 		
 	public float speed = 10.0f;
-	public float jumpForce = 10.0f;
 
 	public PlayerPrefix prefix;
 
 	private bool grounded = false;
-	private bool jump = false;
-    private bool duck = false;
-	
+
 	// Update is called once per frame
 
 	private string horizontalAxis;
 	private string jumpAxis;
     private string verticalAxis;
 
-    public State currentState;
+    private State currentState;
+	public State CurrentState { 
+		get{ return currentState;} 
+		set{ 
+			//Debug.LogFormat ("Change Player {0} state from {1} to {2}", transform.name, currentState, value);
+			currentState = value;
+		}}
     public float controllerThreshold = 0.9f;
+
+	private JumpScript jumpScript;
 
 
 	void Start() {
-		
+
+		jumpScript = transform.GetComponent<JumpScript> ();
+
 		if (prefix == PlayerPrefix.None) {
 			jumpAxis = "Jump";
 			horizontalAxis = "Horizontal";
@@ -52,23 +59,33 @@ public class Movement : MonoBehaviour {
 			horizontalAxis = prefix.ToString () + "Horizontal";
 			verticalAxis = prefix.ToString () + "Vertical";
 		}
+		print (transform.name);
+		print (jumpAxis);
+		print (horizontalAxis);
+		print (verticalAxis);
+
 
 	}
 
 	void Update() {
 		
-		grounded = Physics.Raycast(transform.position, Vector3.down* 0.5f, 0.7f, 1 << LayerMask.NameToLayer("Ground"));
-
+		grounded = Physics.Linecast(transform.position, transform.position + 1.1f * Vector3.down,1 << LayerMask.NameToLayer("Ground"));
 		// If the jump button is pressed and the player is grounded then the player should jump.
 		if(Input.GetAxisRaw(verticalAxis) < -controllerThreshold && grounded)
         {
-            jump = true;
+			Jump ();
         }
 
         if(Input.GetAxisRaw(verticalAxis) > controllerThreshold && grounded)
         {
-            duck = true;
+			Duck();
         }
+
+		if (Input.GetAxisRaw (verticalAxis) < controllerThreshold && Input.GetAxisRaw (verticalAxis) > -controllerThreshold) {
+			if (CurrentState == State.Ducking) {
+				CurrentState = State.None;
+			}
+		}
     }
 
 	void FixedUpdate () {
@@ -76,48 +93,23 @@ public class Movement : MonoBehaviour {
 		float x = Input.GetAxisRaw (horizontalAxis);
         float y = Input.GetAxisRaw(verticalAxis);
 
-		print (currentState.ToString ());
+		print (y);
 
         Vector3 direction = new Vector3 (-x, 0.0f , 0.0f); /// depends on the main camera movement
 		direction.Normalize();
-		transform.position += Time.deltaTime * speed * direction;
-
-		if (y < -controllerThreshold && jump)
-        {
-			Jump ();
-		}
-
-        if(y > controllerThreshold && duck)
-        {
-            Duck();
-        }
-
-        if( Math.Abs(y) < 0.001 )
-        {
-            currentState = State.None;
-        } 
+		transform.position += Time.deltaTime * speed * direction; 
 	}
 
 	void Jump() {
 
-        currentState = State.Jumping;
-		jump = false;
-
-		Rigidbody rigidbody = transform.GetComponent<Rigidbody> ();
-		Debug.AssertFormat (rigidbody != null, "Movement script for {0} needs rigitbody", transform.name);
-
-		if (rigidbody != null) {
-			
-			rigidbody.AddForce (Vector3.up * jumpForce, ForceMode.Impulse);
+		if (jumpScript.Jump ()) {
+			CurrentState = State.Jumping;
 		}
 	}
 
     void Duck()
     {
-        currentState = State.Ducking;
-        duck = false;
+        CurrentState = State.Ducking;
 
-        Rigidbody rigidbody = transform.GetComponent<Rigidbody>();
-        Debug.AssertFormat(rigidbody != null, "Movement script for {0} needs rigitbody", transform.name);
     }
 }
