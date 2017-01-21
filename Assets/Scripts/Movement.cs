@@ -19,7 +19,7 @@ public enum State
     Running
 }
 
-[RequireComponent(typeof(Rigidbody))]
+
 
 [RequireComponent(typeof(JumpScript))]
 public class Movement : MonoBehaviour {
@@ -30,7 +30,6 @@ public class Movement : MonoBehaviour {
 
 
 	public Vector3 direction;
-	private bool grounded = false;
 
 	// Update is called once per frame
 
@@ -75,38 +74,35 @@ public class Movement : MonoBehaviour {
 	}
 
 	void Update() {
-		
-		grounded = Physics.Linecast(transform.position, transform.position + 1.1f * Vector3.down,1 << LayerMask.NameToLayer("Ground"));
-		// If the jump button is pressed and the player is grounded then the player should jump.
-		if(Input.GetAxisRaw(verticalAxis) < -controllerThreshold && grounded)
-        {
-			Jump ();
-        }
-
-        if(Input.GetAxisRaw(verticalAxis) > controllerThreshold && grounded)
-        {
-			Duck();
-        }
-
-		if (Input.GetAxisRaw (verticalAxis) < controllerThreshold && Input.GetAxisRaw (verticalAxis) > -controllerThreshold) {
-			if (CurrentState == State.Ducking) {
-				CurrentState = State.None;
-			}
-		}
-    }
-
-	void FixedUpdate () {
-		
 		float x = Input.GetAxisRaw (horizontalAxis);
-        float y = Input.GetAxisRaw(verticalAxis);
-		if (x != 0.0f || y != 0.0f) {
+		float y = Input.GetAxisRaw(verticalAxis);
+
+
+		// If the jump button is pressed and the player is grounded then the player should jump.
+
+		if (x != 0.0f) {
 			Run ();
 		} else {
 			if (CurrentState == State.Running) {
 				CurrentState = State.None;
 			}
 		}
-	}
+		if(y < -controllerThreshold)
+        {
+			Jump ();
+        }
+
+        if(y > controllerThreshold)
+        {
+			Duck();
+        }
+
+		if (y < controllerThreshold && y > -controllerThreshold) {
+			if (CurrentState == State.Ducking) {
+				CurrentState = State.None;
+			}
+		}
+    }
 
 	void Jump() {
 
