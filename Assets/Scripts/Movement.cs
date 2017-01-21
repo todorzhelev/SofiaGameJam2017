@@ -46,16 +46,18 @@ public class Movement : MonoBehaviour {
 		if (prefix == PlayerPrefix.None) {
 			jumpAxis = "Jump";
 			horizontalAxis = "Horizontal";
+			verticalAxis = "Vertical";
 		} else {
 			jumpAxis = prefix.ToString () + "Jump";
 			horizontalAxis = prefix.ToString () + "Horizontal";
+			verticalAxis = prefix.ToString () + "Vertical";
 		}
 
 	}
 
 	void Update() {
 		
-		grounded = Physics.Raycast(transform.position, Vector3.down, 1.1f);
+		grounded = Physics.Raycast(transform.position, Vector3.down* 0.5f, 0.7f, 1 << LayerMask.NameToLayer("Ground"));
 
 		// If the jump button is pressed and the player is grounded then the player should jump.
 		if(Input.GetAxisRaw(verticalAxis) < -controllerThreshold && grounded)
@@ -74,9 +76,12 @@ public class Movement : MonoBehaviour {
 		float x = Input.GetAxisRaw (horizontalAxis);
         float y = Input.GetAxisRaw(verticalAxis);
 
+		print (currentState.ToString ());
+
         Vector3 direction = new Vector3 (-x, 0.0f , 0.0f); /// depends on the main camera movement
 		direction.Normalize();
 		transform.position += Time.deltaTime * speed * direction;
+
 		if (y < -controllerThreshold && jump)
         {
 			Jump ();

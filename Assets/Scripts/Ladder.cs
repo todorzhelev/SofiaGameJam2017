@@ -24,18 +24,19 @@ public class Ladder : MonoBehaviour {
 		if (other.transform.CompareTag ("Player")) {
 			print (other.name);
 			Movement movement = other.transform.GetComponent<Movement> ();
-			if (movement.jumping == true) {
+			if (movement.currentState == State.Jumping) {
 				MovePlayer (other.transform, Move.up);
 			}
-			if (movement.duck == true) {
+			if (movement.currentState == State.Ducking) {
+				
 				MovePlayer (other.transform, Move.down);
 			}
+			movement.currentState = State.None;
 		}
 	}
 
 	private void MovePlayer(Transform player, Move dir ) {
-		Rigidbody rigidbody = player.GetComponent<Rigidbody> ();
-		rigidbody.velocity = Vector3.zero;
+		
 		Vector3 newPosition = top.position;
 		if (dir == Move.up) {
 			newPosition = top.position;
