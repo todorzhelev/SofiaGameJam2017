@@ -6,14 +6,14 @@ using UnityEngine;
 public class LightFlicker : MonoBehaviour {
 
 	// Your light gameObject here.
-	private Light light;
+	private Light lightObj;
 
 	// Array of random values for the intensity.
 	private float[] smoothing = new float[20];
 
 	void Start(){
 
-		light = transform.GetComponent<Light> ();
+		lightObj = transform.GetComponent<Light> ();
 		// Initialize the array.
 		for(int i = 0 ; i < smoothing.Length ; i++){
 			smoothing[i] = .0f;
@@ -37,6 +37,6 @@ public class LightFlicker : MonoBehaviour {
 
 		// Compute the average of the array and assign it to the
 		// light intensity.
-		light.intensity = sum / smoothing.Length;
+		lightObj.intensity = sum / smoothing.Length;
 	}
 }
