@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Collision : MonoBehaviour {
+public class WallCollision : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
