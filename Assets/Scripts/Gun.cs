@@ -19,6 +19,8 @@ public class Gun : MonoBehaviour
     public float waveScaleModifier = 0.01f;
     public List<Particle> particlesList;
 
+    private string waveControlAxis = "WaveControl";
+
     /// <summary>
     /// ////////////////////////////////////////////////////////////////////////
     /// </summary>
@@ -54,8 +56,13 @@ public class Gun : MonoBehaviour
     /// </summary>
     void Update ()
 	{
-		if(Input.GetButtonDown("Fire1"))
-		{
+        var prefix = transform.GetComponent<Movement>().prefix;
+        string axis = prefix + waveControlAxis;
+
+        float y = Input.GetAxisRaw(axis);
+
+        if (Input.GetButtonDown("Fire1"))
+        {
             Rigidbody bulletInstance = Instantiate(rocket, transform.position, Quaternion.Euler(new Vector3(0, 0, 0))) as Rigidbody;
 
             Particle particle = new Particle();
