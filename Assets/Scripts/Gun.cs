@@ -64,7 +64,7 @@ public class Gun : MonoBehaviour
             particle.m_scale     = waveFrequency;
 
             bulletInstance.transform.localScale = new Vector3(waveFrequency, waveFrequency, waveFrequency);
-
+            bulletInstance.transform.Rotate(new Vector3(90,0,0));
             bulletInstance.AddForce(transform.forward * speed);
 
             particlesList.Add(particle);
