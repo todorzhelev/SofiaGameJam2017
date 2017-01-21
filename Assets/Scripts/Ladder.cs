@@ -36,11 +36,11 @@ public class Ladder : MonoBehaviour {
 	private void MovePlayer(Transform player, Move dir ) {
 		Rigidbody rigidbody = player.GetComponent<Rigidbody> ();
 		rigidbody.velocity = Vector3.zero;
-		Vector3 newPosition;
-		if (Move.up) {
+		Vector3 newPosition = top.position;
+		if (dir == Move.up) {
 			newPosition = top.position;
 		} 
-		if (Move.down) {
+		if (dir == Move.down) {
 			newPosition = bottom.position;
 		}
 		player.position = newPosition;
