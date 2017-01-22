@@ -23,8 +23,6 @@ public class Wave : MonoBehaviour {
 		Vector3 norm = direction.normalized ;
 		transform.position += norm* Time.deltaTime * length;
 
-
-
 		Debug.DrawLine (transform.position , transform.position + direction , Color.red);
 		Debug.DrawLine (transform.position, transform.position + new Vector3(1,0,0) , Color.green);
 	}
@@ -36,7 +34,6 @@ public class Wave : MonoBehaviour {
 			return;
 		}
 		if (collision.transform.CompareTag ("Player")) {
-			//TODO hit the player;
 			return;
 		}
 
@@ -63,6 +60,8 @@ public class Wave : MonoBehaviour {
 	}
 
 	public void CalculateTTL() {
+
+		//TODO use frequency for life and damage
 		ttl = 1 / frequency;
 		transform.localScale += new Vector3 (0, length /10, 0);
 
@@ -70,9 +69,22 @@ public class Wave : MonoBehaviour {
 
 	}
 
+	void HitPlayer(Transform player) {
+		Movement controller = player.GetComponent<Movement> ();
+		controller.TakeDamage (frequency* 10);
+	}
+
 	IEnumerator Die(){
 		yield return new WaitForSeconds (ttl);
 		Destroy (gameObject);
+	}
+
+	void OnTriggerEnter(Collider other) {
+		
+		if (other.CompareTag ("Player") && shooter != other.transform) {
+			print (other.name);
+			HitPlayer (other.transform);
+		}
 	}
 
 

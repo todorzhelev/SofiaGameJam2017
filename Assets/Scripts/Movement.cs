@@ -142,6 +142,7 @@ public class Movement : MonoBehaviour {
 	}
 
 	public void TakeDamage(float damage){
+		Debug.LogFormat ("Player {0} have taken {1} damage:", transform.name, damage);
 		health.TakeDamage (damage);
 		if (health.health <= 0) {
 			Die ();
