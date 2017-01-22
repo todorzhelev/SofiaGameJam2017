@@ -34,7 +34,7 @@ public class Manager : MonoBehaviour
 	}
 
 	public void PlayerDied(Transform player) {
-		EndGame (string.Format ("Mastermind {0} has faild", player.name));
+		EndGame (string.Format ("Mastermind {0} has failed", player.name));
 	}
 
 	public void EndGame(string endText) {
