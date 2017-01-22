@@ -47,15 +47,16 @@ public class Gun : MonoBehaviour
 	void Shoot() {
 
         Movement mov = transform.GetComponent<Movement>();
-
+        WaveLength = mov.currentWaveLength;
+        WaveFrequency = mov.currentWaveFrequency;
         dir = transform.position + Vector3.right * 100 + Vector3.down * mov.currentWaveControlVal;
 
         GameObject instance = Instantiate (wave, transform.position, Quaternion.identity);
 		instance.transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f); // TODO placeholder
 		Wave waveScript = instance.GetComponent<Wave> ();
 		waveScript.direction = (dir - transform.position);
-		waveScript.frequency = mov.currentWaveFrequency;
-		waveScript.length = mov.currentWaveLength;
+		waveScript.frequency = WaveFrequency;
+		waveScript.length = WaveLength;
 		waveScript.shooter = transform;
 		waveScript.CalculateTTL ();
 	}
