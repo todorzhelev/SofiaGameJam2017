@@ -5,7 +5,6 @@ public class CameraFollow : MonoBehaviour
 {
 	public Vector3 offset;
 	public Vector3 rotation;
-	public float maxZ;
 
 	public Transform player1;
 	public Transform player2;
@@ -50,8 +49,5 @@ public class CameraFollow : MonoBehaviour
 		Camera.main.transform.position = middlePoint + dir * (cameraDistance + DISTANCE_MARGIN);
 		Camera.main.transform.position += offset;
 		Camera.main.transform.localEulerAngles = rotation;
-		if (Camera.main.transform.position.z > maxZ) {
-			Camera.main.transform.position = new Vector3 (Camera.main.transform.position.x, Camera.main.transform.position.y, maxZ);
-		}
 	}
 }
