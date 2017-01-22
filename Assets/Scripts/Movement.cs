@@ -64,6 +64,7 @@ public class Movement : MonoBehaviour {
 	private SpriteAnimator anim;
 	private Gun gun;
 	private PlayerHealth health;
+	private Manager gameManager;
 
     public float currentWaveControlVal = 0;
     public float waveControlOffset = 3f;
@@ -76,6 +77,8 @@ public class Movement : MonoBehaviour {
 		jumpScript = transform.GetComponent<JumpScript> ();
 		gun = transform.GetComponent<Gun> ();
 		health = transform.GetComponent<PlayerHealth> ();
+
+		gameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<Manager> ();
 
 		if (prefix == PlayerPrefix.None) {
 			jumpAxis = "Jump";
@@ -195,6 +198,8 @@ public class Movement : MonoBehaviour {
 
 	void Die(){
 		CurrentState = State.Die;
+		gameManager.PlayerDied (transform);
+
 	}
 
 }

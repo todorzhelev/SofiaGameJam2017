@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Manager : MonoBehaviour 
 {
 	public float gameTimer = 60.0f;
 	public RectTransform timer;
+	public RectTransform endScreen;
 
 	private float timeLeft;
 
@@ -20,7 +22,7 @@ public class Manager : MonoBehaviour
 		timeLeft -= Time.deltaTime;
 		if (timeLeft <= 0.0f) {
 			Time.timeScale = 0;
-			EndGame ();
+			EndGame ("Draw");
 		}
 		UpdateTimer ();
 	}
@@ -31,10 +33,19 @@ public class Manager : MonoBehaviour
 	}
 
 	public void PlayerDied(Transform player) {
-
+		EndGame (string.Format ("Mastermind {0} has faild", player.name));
 	}
 
-	void EndGame() {
+	void EndGame(string endText) {
+		Text text = endScreen.FindChild ("Text").GetComponent<Text> ();
+		endScreen.gameObject.SetActive (true);
+		text.text = endText;
 
+
+		Invoke ("GoToMainMenu", 4);
+	}
+
+	void GoToMainMenu() {
+		SceneManager.LoadScene ("main",LoadSceneMode.Single);
 	}
 }
