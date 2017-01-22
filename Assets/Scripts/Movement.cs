@@ -69,6 +69,8 @@ public class Movement : MonoBehaviour {
     public float waveControlOffset = 3f;
     public float currentWaveLength = 10f;
     public float currentWaveFrequency = 1f;
+    public float waveLengthModifier = 5f;
+    public float waveFrequencyModifier = 0.3f;
 
     void Start() {
 		// get refs
@@ -145,22 +147,22 @@ public class Movement : MonoBehaviour {
 
         if (Input.GetButtonDown(waveFrequencyUpButton))
         {
-            currentWaveFrequency += 20;
+            currentWaveFrequency -= waveFrequencyModifier;
         }
 
         if (Input.GetButtonDown(waveFrequencyDownButton))
         {
-            currentWaveFrequency -= 20;
+            currentWaveFrequency += waveFrequencyModifier;
         }
 
         if (Input.GetButtonDown(waveLengthUpButton))
         {
-            currentWaveLength += 20;
+            currentWaveLength += waveLengthModifier;
         }
 
         if (Input.GetButtonDown(waveLengthDownButton))
         {
-            currentWaveLength -= 20;
+            currentWaveLength -= waveLengthModifier;
         }
     }
 
