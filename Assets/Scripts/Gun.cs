@@ -7,12 +7,37 @@ public class Gun : MonoBehaviour
 	public GameObject wave;				// Prefab of the wave.
 	public Vector3 dir;
     //controls how big the wave is
-    public float waveFrequency = 1f;
+    private float waveFrequency = 1f;
     //controls the lifetime of a wave
-    public float waveLength = 10;
+    private float waveLength = 10;
 
+    public float WaveFrequency
+    {
+        get
+        {
+            return waveFrequency;
+        }
 
-	void Start  () {
+        set
+        {
+            waveFrequency = value;
+        }
+    }
+
+    public float WaveLength
+    {
+        get
+        {
+            return waveLength;
+        }
+
+        set
+        {
+            waveLength = value;
+        }
+    }
+
+    void Start  () {
 		dir = transform.position + Vector3.right;
 	}
 	public void Fire() {
@@ -29,8 +54,8 @@ public class Gun : MonoBehaviour
 		instance.transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f); // TODO placeholder
 		Wave waveScript = instance.GetComponent<Wave> ();
 		waveScript.direction = (dir - transform.position);
-		waveScript.frequency = waveFrequency;
-		waveScript.length = waveLength;
+		waveScript.frequency = mov.currentWaveFrequency;
+		waveScript.length = mov.currentWaveLength;
 		waveScript.shooter = transform;
 		waveScript.CalculateTTL ();
 	}
