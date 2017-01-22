@@ -23,6 +23,8 @@ public class Wave : MonoBehaviour {
 		Vector3 norm = direction.normalized ;
 		transform.position += norm* Time.deltaTime * length;
 
+
+
 		Debug.DrawLine (transform.position , transform.position + direction , Color.red);
 		Debug.DrawLine (transform.position, transform.position + new Vector3(1,0,0) , Color.green);
 	}
@@ -64,5 +66,14 @@ public class Wave : MonoBehaviour {
 		ttl = 1 / frequency;
 		transform.localScale += new Vector3 (0, length /10, 0);
 
+		StartCoroutine ("Die");
+
 	}
+
+	IEnumerator Die(){
+		yield return new WaitForSeconds (ttl);
+		Destroy (gameObject);
+	}
+
+
 }

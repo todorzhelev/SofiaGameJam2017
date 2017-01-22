@@ -32,7 +32,7 @@ public class WaveSpawner : MonoBehaviour {
 		instance.transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f);
 		Wave waveScript = instance.GetComponent<Wave> ();
 		waveScript.direction = (dir.position - transform.position);
-		waveScript.frequency = 10;
+		waveScript.frequency = 100;
 		waveScript.length = 1;
 		waveScript.shooter = transform;
 		waveScript.CalculateTTL ();
