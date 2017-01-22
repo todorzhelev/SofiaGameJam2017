@@ -6,7 +6,7 @@ public class DoorScript : MonoBehaviour {
 
 	public bool closed = true;
 
-	public float smooth = 1f;
+	public float smooth = .1f;
 	private Vector3 targetAngles;
 
 	private Transform door;
