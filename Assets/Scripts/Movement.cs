@@ -80,8 +80,6 @@ public class Movement : MonoBehaviour {
 		gun = transform.GetComponent<Gun> ();
 		health = transform.GetComponent<PlayerHealth> ();
 
-		gameManager = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<Manager> ();
-
 		if (prefix == PlayerPrefix.None) {
 			jumpAxis = "Jump";
 			horizontalAxis = "Horizontal";
@@ -99,6 +97,8 @@ public class Movement : MonoBehaviour {
             waveLengthDownButton    = prefix.ToString() + "WaveLengthDown";
 
         }
+
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Manager>();
     }
 
 	void Update() {
