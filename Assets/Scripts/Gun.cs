@@ -10,6 +10,7 @@ public class Gun : MonoBehaviour
     private float waveFrequency = 1f;
     //controls the lifetime of a wave
     private float waveLength = 10;
+    
 
     public float WaveFrequency
     {
@@ -49,9 +50,10 @@ public class Gun : MonoBehaviour
         Movement mov = transform.GetComponent<Movement>();
         WaveLength = mov.currentWaveLength;
         WaveFrequency = mov.currentWaveFrequency;
+
         dir = transform.position + Vector3.right * 100 + Vector3.down * mov.currentWaveControlVal;
 
-        GameObject instance = Instantiate (wave, transform.position, Quaternion.identity);
+        GameObject instance = Instantiate (wave, transform.position+ new Vector3(0, 0.6f, 0), Quaternion.identity);
 		instance.transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f); // TODO placeholder
 		Wave waveScript = instance.GetComponent<Wave> ();
 		waveScript.direction = (dir - transform.position);

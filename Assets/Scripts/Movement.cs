@@ -80,7 +80,9 @@ public class Movement : MonoBehaviour {
 		gun = transform.GetComponent<Gun> ();
 		health = transform.GetComponent<PlayerHealth> ();
 
-		if (prefix == PlayerPrefix.None) {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Manager>();
+
+        if (prefix == PlayerPrefix.None) {
 			jumpAxis = "Jump";
 			horizontalAxis = "Horizontal";
 			verticalAxis = "Vertical";
@@ -98,7 +100,7 @@ public class Movement : MonoBehaviour {
 
         }
 
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Manager>();
+        
     }
 
 	void Update() {
@@ -139,7 +141,12 @@ public class Movement : MonoBehaviour {
 		}
 
         float waveControl = Input.GetAxisRaw(waveControlAxis);
-        if( waveControl > 0 )
+        if (waveControlAxis == "P2_WaveControl")
+        {
+            waveControl = 0;
+        }
+
+        if ( waveControl > 0 )
         {
             currentWaveControlVal+= waveControlOffset;
         }
