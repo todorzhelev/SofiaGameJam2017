@@ -63,7 +63,7 @@ public class Wave : MonoBehaviour {
 
 		//TODO use frequency for life and damage
 		ttl = 1 / frequency;
-		transform.localScale += new Vector3 (0, length /10, 0);
+		transform.localScale += new Vector3 (0, length /50, 0);
 
 		StartCoroutine ("Die");
 

@@ -38,6 +38,7 @@ public class Movement : MonoBehaviour {
 	private string jumpAxis;
     private string verticalAxis;
 	private string fireAxis;
+    private string waveControlAxis;
 
     
 	[SerializeField]
@@ -59,8 +60,10 @@ public class Movement : MonoBehaviour {
 	private Gun gun;
 	private PlayerHealth health;
 
+    public float currentWaveControlVal = 0;
+    public float waveControlOffset = 3f;
 
-	void Start() {
+    void Start() {
 		// get refs
 		anim = transform.GetComponentInChildren<SpriteAnimator> ();
 		jumpScript = transform.GetComponent<JumpScript> ();
@@ -77,9 +80,8 @@ public class Movement : MonoBehaviour {
 			horizontalAxis = prefix.ToString () + "Horizontal";
 			verticalAxis = prefix.ToString () + "Vertical";
 			fireAxis = prefix.ToString () + "Fire1";
-		}
-
-
+            waveControlAxis = prefix.ToString() + "WaveControl";
+        }
 	}
 
 	void Update() {
@@ -118,6 +120,16 @@ public class Movement : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.G)) {
 			TakeDamage (10);
 		}
+
+        float waveControl = Input.GetAxisRaw(waveControlAxis);
+        if( waveControl > 0 )
+        {
+            currentWaveControlVal+= waveControlOffset;
+        }
+        else if( waveControl < 0)
+        {
+            currentWaveControlVal-= waveControlOffset;
+        }
     }
 
 	void Jump() {

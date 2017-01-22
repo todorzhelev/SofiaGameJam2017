@@ -21,7 +21,11 @@ public class Gun : MonoBehaviour
 
 	void Shoot() {
 
-		GameObject instance = Instantiate (wave, transform.position, Quaternion.identity);
+        Movement mov = transform.GetComponent<Movement>();
+
+        dir = transform.position + Vector3.right * 100 + Vector3.down * mov.currentWaveControlVal;
+
+        GameObject instance = Instantiate (wave, transform.position, Quaternion.identity);
 		instance.transform.localScale = new Vector3 (0.1f, 0.1f, 0.1f); // TODO placeholder
 		Wave waveScript = instance.GetComponent<Wave> ();
 		waveScript.direction = (dir - transform.position);
