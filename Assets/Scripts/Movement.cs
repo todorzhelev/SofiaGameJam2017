@@ -57,6 +57,7 @@ public class Movement : MonoBehaviour {
 	//animate
 	private SpriteAnimator anim;
 	private Gun gun;
+	private PlayerHealth health;
 
 
 	void Start() {
@@ -64,6 +65,8 @@ public class Movement : MonoBehaviour {
 		anim = transform.GetComponentInChildren<SpriteAnimator> ();
 		jumpScript = transform.GetComponent<JumpScript> ();
 		gun = transform.GetComponent<Gun> ();
+		health = transform.GetComponent<PlayerHealth> ();
+
 		if (prefix == PlayerPrefix.None) {
 			jumpAxis = "Jump";
 			horizontalAxis = "Horizontal";
@@ -111,6 +114,10 @@ public class Movement : MonoBehaviour {
 				CurrentState = State.None;
 			}
 		}
+
+		if (Input.GetKeyDown (KeyCode.G)) {
+			TakeDamage (10);
+		}
     }
 
 	void Jump() {
@@ -132,6 +139,17 @@ public class Movement : MonoBehaviour {
 		direction.Normalize();
 		transform.position += Time.deltaTime * speed * direction; 
 		CurrentState = State.Running;
+	}
+
+	public void TakeDamage(float damage){
+		health.TakeDamage (damage);
+		if (health.health <= 0) {
+			Die ();
+		}
+	}
+
+	void Die(){
+		CurrentState = State.Die;
 	}
 
 }
