@@ -43,8 +43,9 @@ public class SpriteAnimator : MonoBehaviour {
 			anim.Play ("Die");
 			break;
 		}
+	}
 
-
-
+	public void PlayAnim (string name) {
+		anim.Play(name);
 	}
 }

@@ -84,6 +84,7 @@ public class Movement : MonoBehaviour {
 		float y = Input.GetAxisRaw(verticalAxis);
 		if (Input.GetButtonDown (fireAxis)) {
 			gun.Fire ();
+			anim.PlayAnim ("Shoot");
 		}
 
 		// If the jump button is pressed and the player is grounded then the player should jump.
