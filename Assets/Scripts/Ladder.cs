@@ -49,4 +49,8 @@ public class Ladder : MonoBehaviour {
 		player.position = newPosition;
 
 	}
+
+	public void RegisterTrigger(LadderTrigger trigger) {
+
+	}
 }
