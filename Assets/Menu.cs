@@ -1,26 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
 
-	public Transform menuPanel;
-	public Transform creditsPanel;
+	public Sprite menuPanel;
+	public Sprite creditsPanel;
+
+	public Image background;
+
+	private bool credistsShown = false;
 
 	public void StartGame() {
 		SceneManager.LoadScene ("level01",LoadSceneMode.Single);
 	}
 
 	public void ShowCredits() {
-		menuPanel.gameObject.SetActive (false);
-		creditsPanel.gameObject.SetActive (true);
+		background.sprite = credistsShown ? menuPanel : creditsPanel;
+		credistsShown = !credistsShown;
 	}
 
-	public void HideCredits () {
-		menuPanel.gameObject.SetActive (true);
-		creditsPanel.gameObject.SetActive (false);
-	}
+
 
 	public void Exit() {
 
