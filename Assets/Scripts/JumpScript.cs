@@ -12,6 +12,8 @@ public class JumpScript : MonoBehaviour {
 	public bool inputJump = false;
 	public bool grounded = true;
 
+	public float goundDist = 0.3f;
+
 	Movement movement;
 
 	void Start()
@@ -56,6 +58,10 @@ public class JumpScript : MonoBehaviour {
 	}
 
 	bool isGrounded () {
-		return Physics.Linecast(transform.position, transform.position + 0.3f * Vector3.down,1 << LayerMask.NameToLayer("Ground"));
+		return Physics.Linecast(transform.position, transform.position + goundDist * Vector3.down,1 << LayerMask.NameToLayer("Ground"));
+	}
+
+	void OnDrawGizmos() {
+		Debug.DrawLine (transform.position, transform.position + goundDist * Vector3.down, Color.red);
 	}
 }

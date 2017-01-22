@@ -16,7 +16,8 @@ public enum State
     None,
     Jumping,
     Ducking,
-    Running
+    Running,
+	Die
 }
 
 

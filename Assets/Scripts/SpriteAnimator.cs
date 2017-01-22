@@ -36,7 +36,14 @@ public class SpriteAnimator : MonoBehaviour {
 				transform.localEulerAngles = new Vector3 (0, -180, 0);
 			}
 			break;
+		case State.Jumping:
+			anim.Play ("Jump");
+			break;
+		case State.Die:
+			anim.Play ("Die");
+			break;
 		}
+
 
 
 	}
