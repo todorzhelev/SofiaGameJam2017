@@ -40,8 +40,13 @@ public class Movement : MonoBehaviour {
 	private string fireAxis;
     private string waveControlAxis;
 
-    
-	[SerializeField]
+    private string waveFrequencyUpButton;
+    private string waveFrequencyDownButton;
+
+    private string waveLengthUpButton;
+    private string waveLengthDownButton;
+
+    [SerializeField]
 	public State CurrentState { 
 		get{ return currentState;} 
 		set{ 
@@ -62,6 +67,8 @@ public class Movement : MonoBehaviour {
 
     public float currentWaveControlVal = 0;
     public float waveControlOffset = 3f;
+    public float currentWaveLength = 10f;
+    public float currentWaveFrequency = 1f;
 
     void Start() {
 		// get refs
@@ -76,13 +83,18 @@ public class Movement : MonoBehaviour {
 			verticalAxis = "Vertical";
 			fireAxis = "Fire1";
 		} else {
-			jumpAxis = prefix.ToString () + "Jump";
-			horizontalAxis = prefix.ToString () + "Horizontal";
-			verticalAxis = prefix.ToString () + "Vertical";
-			fireAxis = prefix.ToString () + "Fire1";
-            waveControlAxis = prefix.ToString() + "WaveControl";
+			jumpAxis                = prefix.ToString () + "Jump";
+			horizontalAxis          = prefix.ToString () + "Horizontal";
+			verticalAxis            = prefix.ToString () + "Vertical";
+			fireAxis                = prefix.ToString () + "Fire1";
+            waveControlAxis         = prefix.ToString() + "WaveControl";
+            waveFrequencyUpButton   = prefix.ToString() + "FrequencyUp";
+            waveFrequencyDownButton = prefix.ToString() + "FrequencyDown";
+            waveLengthUpButton      = prefix.ToString() + "WaveLengthUp";
+            waveLengthDownButton    = prefix.ToString() + "WaveLengthDown";
+
         }
-	}
+    }
 
 	void Update() {
 		float x = Input.GetAxisRaw (horizontalAxis);
@@ -129,6 +141,26 @@ public class Movement : MonoBehaviour {
         else if( waveControl < 0)
         {
             currentWaveControlVal-= waveControlOffset;
+        }
+
+        if (Input.GetButtonDown(waveFrequencyUpButton))
+        {
+            currentWaveFrequency += 20;
+        }
+
+        if (Input.GetButtonDown(waveFrequencyDownButton))
+        {
+            currentWaveFrequency -= 20;
+        }
+
+        if (Input.GetButtonDown(waveLengthUpButton))
+        {
+            currentWaveLength += 20;
+        }
+
+        if (Input.GetButtonDown(waveLengthDownButton))
+        {
+            currentWaveLength -= 20;
         }
     }
 
